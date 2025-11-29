@@ -19,9 +19,7 @@ def preprocess_img(gray):
     # gray: single-channel grayscale image
 
     # 1) Inverse binary: text + lines = 255, background = 0
-    _, bin_inv = cv2.threshold(
-        gray, 0, 255, cv2.THRESH_BINARY_INV + cv2.THRESH_OTSU
-    )
+    ret, bin_inv = cv2.threshold(gray, 0, 255, cv2.THRESH_BINARY_INV + cv2.THRESH_OTSU)
 
     h, w = bin_inv.shape
     kernel_width = max(40, w // 25) #!
@@ -58,7 +56,7 @@ def line_segmentation(image):
     ink_mask = (bin_img == 0) # mask to find all the pixels with ink
     ink_pixel_counts = np.sum(ink_mask, axis=1) # this works because we have either 0 or 1, and sum gives us num of 1s!
 
-    print(ink_pixel_counts[:20]) # testing
+    # print(ink_pixel_counts[:20]) # testing
 
     # 3. HPP
     threshold = 0.1 * ink_pixel_counts.max()
