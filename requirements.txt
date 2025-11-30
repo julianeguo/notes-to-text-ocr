@@ -1,5 +1,7 @@
 streamlit
-pypdf
-transformers
-torch
+numpy
 pillow
+torch
+transformers
+opencv-python-headless
+pypdf
